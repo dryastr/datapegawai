@@ -102,6 +102,24 @@
                 </li>
             @endif
 
+            @if (auth()->user()->role_id == 1)
+                <li class="sidebar-item has-sub {{ Request::is('regions*') ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-compass"></i>
+                        <span>Data Wilayah</span>
+                    </a>
+
+                    <ul class="submenu">
+                        <li class="submenu-item {{ Request::routeIs('regions.index') ? 'active' : '' }}">
+                            <a href="{{ route('regions.index') }}" class="submenu-link">Daftar Wilayah</a>
+                        </li>
+                        <li class="submenu-item {{ Request::routeIs('regions.create') ? 'active' : '' }}">
+                            <a href="{{ route('regions.create') }}" class="submenu-link">Tambah Wilayah</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
             @if (auth()->user()->role_id == 2)
                 <li class="sidebar-item has-sub {{ Request::is('tasks-user*') ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>

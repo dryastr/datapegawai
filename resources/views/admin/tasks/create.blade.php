@@ -40,9 +40,6 @@
                                 <div class="col-md-8 form-group">
                                     <select id="user_id" class="form-control" name="user_id" required>
                                         <option value="">Pilih Karyawan</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
 
@@ -89,3 +86,31 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById('region_id').addEventListener('change', function() {
+            const regionId = this.value;
+            const userSelect = document.getElementById('user_id');
+
+            // Kosongkan daftar karyawan
+            userSelect.innerHTML = '<option value="">Pilih Karyawan</option>';
+
+            if (regionId) {
+                // Lakukan AJAX request
+                fetch(`/get-users/${regionId}`)
+                    .then(response => response.json())
+                    .then(users => {
+                        // Tambahkan karyawan ke dalam select
+                        users.forEach(user => {
+                            const option = document.createElement('option');
+                            option.value = user.id;
+                            option.textContent = user.name;
+                            userSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+@endpush

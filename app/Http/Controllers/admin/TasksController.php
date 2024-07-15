@@ -22,6 +22,12 @@ class TasksController extends Controller
         return view('admin.tasks.index', compact('tasks'));
     }
 
+    public function getUsersByRegion($region_id)
+    {
+        $users = User::where('region_id', $region_id)->get();
+        return response()->json($users);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

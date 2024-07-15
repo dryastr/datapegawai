@@ -49,6 +49,8 @@
                             <label for="password" class="form-label">Password (biarkan kosong jika tidak ingin
                                 mengubah)</label>
                             <input type="password" class="form-control" id="password" name="password">
+                            <label id="password-warning" class="form-label text-muted mt-1" style="font-size: 13px">Password minimal 8
+                                karakter</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
@@ -57,4 +59,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const warningLabel = document.getElementById('password-warning');
+
+            if (password.length === 0) {
+                warningLabel.textContent = 'Password minimal 8 karakter';
+                warningLabel.classList.remove('text-success', 'text-danger');
+                warningLabel.classList.add('text-muted');
+            } else if (password.length < 8) {
+                warningLabel.textContent = 'Password minimal 8 karakter';
+                warningLabel.classList.remove('text-success', 'text-muted');
+                warningLabel.classList.add('text-danger');
+            } else {
+                warningLabel.textContent = 'Password aman';
+                warningLabel.classList.remove('text-danger', 'text-muted');
+                warningLabel.classList.add('text-success');
+            }
+        });
+    </script>
 @endsection

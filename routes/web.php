@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\RegionsController;
 use App\Http\Controllers\admin\ReportsController;
 use App\Http\Controllers\Admin\TasksController;
 use App\Http\Controllers\admin\UsersAdminController;
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'role.admin'])->group(function () {
 
     // Tasks
     Route::resource('tasks', TasksController::class);
+    Route::get('/get-users/{region_id}', [TasksController::class, 'getUsersByRegion'])->name('get-users-by-region');
 
     // Reports
     Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
@@ -47,6 +49,9 @@ Route::middleware(['auth', 'role.admin'])->group(function () {
 
     // Users
     Route::resource('users', UsersAdminController::class);
+
+    // Regions
+    Route::resource('regions', RegionsController::class);
 });
 
 Route::middleware(['auth', 'role.user'])->group(function () {
