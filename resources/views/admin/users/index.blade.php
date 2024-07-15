@@ -45,8 +45,6 @@
                                                     </button>
                                                     <ul class="dropdown-menu"
                                                         aria-labelledby="dropdownMenuButton-{{ $user->id }}">
-                                                        {{-- <li><a class="dropdown-item"
-                                                                href="{{ route('users.show', $user->id) }}">Detail</a></li> --}}
                                                         <li><a class="dropdown-item"
                                                                 href="{{ route('users.edit', $user->id) }}">Ubah</a></li>
                                                         <li>
